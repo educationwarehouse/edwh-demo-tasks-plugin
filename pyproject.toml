@@ -7,7 +7,7 @@ name = "edwh-demo-plugin"
 dynamic = ["version"]
 description = 'Demo project with a plugin to be discovered from the edwh package'
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "MIT"
 keywords = ["edwh"]
 authors = [
@@ -23,12 +23,14 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ['edwh']
+dependencies = [
+    "edwh",
+]
 
 [project.optional-dependencies]
 dev = [
     "hatch",
-    # "python-semantic-release",
+    "python-semantic-release<8",
     "black",
 ]
 
@@ -39,6 +41,7 @@ Source = "https://github.com/educationwarehouse/edwh-demo-tasks-plugin"
 
 # https://packaging.python.org/en/latest/guides/creating-and-discovering-plugins/#using-package-metadata
 [project.entry-points."edwh.tasks"]
+# namespace: (edwh demo.command)
 demo = "edwh_demo_plugin.demo_plugin"
 
 [tool.hatch.version]
@@ -100,13 +103,14 @@ all = [
 ]
 
 [tool.black]
-target-version = ["py310"]
+target-version = ["py311"]
 line-length = 120
 skip-string-normalization = false
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 120
+[tool.ruff.lint]
 select = [
     "F", # pyflake error
     "E", # pycodestyle error
@@ -137,13 +141,13 @@ unfixable = [
     "F401",
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["edwh_demo_plugin"]
 
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
