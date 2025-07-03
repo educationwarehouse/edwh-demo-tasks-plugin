@@ -1,4 +1,5 @@
-from invoke import Context, task
+from edwh import task
+from invoke import Context
 
 
 @task()
