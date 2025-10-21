@@ -1,6 +1,7 @@
-from invoke import task
+from edwh import task
+from invoke import Context
 
 
 @task()
-def foo(c):
-    print("Hello, world!")
+def foo(c: Context) -> None:
+    c.run("echo Hello World")
